@@ -1,0 +1,30 @@
+<!--html:5 해주면 기본 형식이 자동으로 생성됨-->
+<!-- html을 조금씩 수정해줄 때마다 일일히 웹 브라우저로 오픈하고 확인하기 너무 힘듦- live server를 설치(비쥬얼 슽튜디오 내에서)-->
+<!-- 그러면 우측 하단에 생성된 Go Live 라는 칸을 클릭하면 해당 페이지가 웹 브라우저로 바로 열림, 끝낼 때도 같은 칸을 클릭-->
+<!-- 제일 최초에 한 번 실행되면 따로 새로 고침할 필요 없음-->
+<!-- go live의 서버와 웹 서버는 걍 완전 별개! 따라서 라우팅하는 페이지는 웹 서버에 의해 띄워져야 하면 웹 서버도 구동 시켜야 함!-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> <!-- 해당 "탭"의 이름-->
+</head>
+<body>
+
+    <!--go live로 띄우면 서버가 5000번으로 인식함! 따라서 포트 번호까지 있도록 라우팅 경로를 제대로! 써줘야 함-->
+    <form method='get' action='http://192.168.123.195:8080/login'> <!-- action: 해당 form을 제출한 후에 넘어가는 페이지(라우팅할 페이지)-->
+        <center>
+        <h1>로그인</h1>
+        <!--당연히 이 form의 데이터들은 url의 파라미터로 전달이 되어야 하니까, login.html에서 설정한 변수명과 같아야함-->
+        <input type="text",name="user_name"/><br/>  <!-- 텍스트 창을 생성, 해당 폼에서 받는 내용은 name(user_name)이라는 변수에 담음-->
+        <input type="text",name="pw"/> <br/> <!--br은 줄 바꿈 태그/ endl의 역할-->
+        <input type="submit"/>
+        </center>
+</form>
+    
+</body>
+</html>
+
