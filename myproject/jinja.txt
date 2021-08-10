@@ -1,0 +1,29 @@
+### 1.Jinja2 템플릿
+- 웹페이지에 필요한 부분을 변경할 필요가 있을 때 사용하는 간단한 문법
+- 웹페이지에서 파이썬 프로그래밍이 가능
+- 다음 두 가지 문법이 핵심
+- {{ 변수명 }}
+- {% 파이썬 소스코드 %}
+
+
+
+### 2.Jinja2 템플릿에서의 반복문 문법
+- 기본 문법: for 로 선언하고, endfor 로 끝나야 함
+{% for value in values %}
+{{ value }}
+{% endfor %}
+
+- 특정 횟수만큼만 반복하고 싶을 때 (반복문 추가 문법)
+- range() : 파이썬과 동일
+  - 단! for index in range(len(values)) 는 정상동작하지 않음
+  
+- len(values) : values | length 로 작성해야 함
+- loop.index : 반복문 횟수를 반복문 안에서 가져올 수 있음 (enumerate를 씌웠을 때 나오는 index와 같은 역할,단 1부터 바로 시작)
+- value[index] : 파이썬 리스트와 동일
+
+html
+    <ul>
+      {% for index in range(values | length) %}
+      <li>{{ values[index] }} {{ loop.index }}</li>
+      {% endfor %}
+    </ul>
