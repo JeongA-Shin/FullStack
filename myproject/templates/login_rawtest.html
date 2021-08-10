@@ -1,0 +1,73 @@
+<!-- login.html처럼 일일히 다 만들기엔 너무 힘들고 시간 오래 걸림. 그래서 bootstrap을 활용-->
+<!-- 이거는 bootstrap에 있는 로그인 페이지 예시들을 가지고 온 것임-->
+<!-- 이 html관련 css정보들은 모두 static 폴더 안에 넣음, 따라서 css 파일 및 폴더의 위치들을 /static/..으로 시작하도록 변경함-->
+<!-- 그리고 body부분도 내 의도 맞게 변형함(아래 참고)-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.87.0">
+    <title>Signin Template · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="/static/signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin">
+  <form action='/login' method='get'> <!-- action: 어떤 페이지로 넘어갈 것인지 정함!, 그리고 어차피 페이지를 flask의 서버로 띄우므로 포트가 어차피 8080임. 따라서 풀 주소가 아니라 그냥 /login이렇게 해줘도 됨-->
+    <!--form태그에서 method태그를 안 쓰면 디폴트로 get이 설정됨-->
+    <img class="mb-4" src="/static/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email_address"><!--login.py에 email_address으로 전달되어야 하므로 name태그를 활용해서 해줌-->
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwd"> <!--login.py에 passwd으로 전달되어야 하므로 name태그를 활용해서 해줌-->
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </form>
+</main>
+
+
+    
+  </body>
+</html>
