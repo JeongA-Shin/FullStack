@@ -1,4 +1,4 @@
-### 1.Jinja2 템플릿
+### 1.Jinja2 템플릿 - variable.html, variable_test.py에 예제 있음
 - 웹페이지에 필요한 부분을 변경할 필요가 있을 때 사용하는 간단한 문법
 - 웹페이지에서 파이썬 프로그래밍이 가능
 - 다음 두 가지 문법이 핵심
@@ -7,7 +7,7 @@
 
 
 
-### 2.Jinja2 템플릿에서의 반복문 문법
+### 2.Jinja2 템플릿에서의 반복문 문법 - loop.html, loop_test.py
 - 기본 문법: for 로 선언하고, endfor 로 끝나야 함
 {% for value in values %}
 {{ value }}
@@ -27,3 +27,17 @@ html
       <li>{{ values[index] }} {{ loop.index }}</li>
       {% endfor %}
     </ul>
+
+### 3.Jinja2 템플릿에서의 조건문 문법 - condition_test.py, condition.html
+- 기본 문법: if, elif, else, endif 로 구성 가능 (당연히 elif, else 는 조건에 따라 안써도 됨)
+- {% if %} {% elif %} {% else %} {% endif %} 
+
+
+- 예:
+    {% if data >= 30 %}
+    <h3>30보다 큽니다.</h3>
+    {% elif data > 25 %}
+    <h3>25보다 큽니다.</h3>
+    {% else %}
+    <h3>{{ data }}</h3>
+    {% endif %}
