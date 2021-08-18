@@ -1,0 +1,98 @@
+## 4. 실제 프론트엔드(vue)와 flask  기반 Rest API
+
+### 폴더 구성
+- vue 폴더와 flask 폴더 구분
+- vue 폴더에 vue_test.html 파일 생성
+  - https://getbootstrap.com/docs/4.5/getting-started/introduction/ 에서 다음 템플릿 코드 복사
+
+
+HTTP 요청 메서드
+클라이언트가 서버에 HTTP 요청시 요청 '목적'을 알리는 표시
+크게 GET,POST,PUT,DELETE 방식이 있음
+요청 메서드에 따라 요청 데이터를 전달하는 방식에 차이가 있음
+
+### CDN(Contents Delivery Network)이란?
+- 지리적, 물리적으로 떨어져 있는 사용자에게 컨텐츠 제공자의 컨텐츠를 더 빠르게 제공할 수 있는 기술을 의미
+- 사용자(예:한국, 서울에서의 나)가 멀리 있는 서버(예:아마존의 미국 서버)로부터 컨텐츠를 다운로드 받으면
+  시간이 오래 걸리므로, 사용자와 가까운 곳에 위치한 Cache Server에 해당 컨텐츠를 저장해놓고 컨텐츠 요청시
+  서버가 아닌, Cache Server가 응답을 주는 기술
+
+### 3. CORS(Cross Origin Resource Sharing)
+
+- 웹에서 사용하는 HTTP request는 기본적으로 다른 도메인의 데이터를 요청할 수 있음!
+<img src='오른쪽 클릭해서 나오는 이미지 주소'/>
+  - 예:
+    - 내가 접속한 서버: 라이브 서버
+    - 해당 웹페이지 안에서 <img> 태그로 www.kkk.co.kr/google.jpg 파일을 가져와서 이미지로 보여줄 수 있음
+    - 해당 웹페이지 안에서 <link> 태그로 www.kkk.co.kr/style.css 파일을 가져와서 CSS 스타일을 적용할 수 있음
+
+    - **하지만! 다음 스크립트 태그로 둘러싸인 스크립트 코드(자바 스크립트 안에서)에서 
+       실행되는 HTTP request 는 라이브 서버에만 요청할 수 있음(즉 스크립트 안에서 다른 서버의 이미지를 위의 방식으로 호출 불가)**
+       ->즉 내가 쓰는 서버가 아닌 다른 서버(예:구글 이미지)에서 위의 방식으로 이미지 삽입 불가
+
+       -->즉 스크립트 내에서는 늘 같은 서버 안에서 요청이 들어가고 나가야 함!
+    ```
+    <script></script>
+    ```
+      - 정확하게는 프로토콜, 호스트명, 포트가 동일해야 함
+      - 이를 **Same Origin Policy** 라고 함
+      - 즉 원래대로면 same origin policy 때문에 html을 라이브 서버로 띄울 경우 localhost에도 요청을 못 함(서버가 다른 거니까)
+      
+> ajax, axios(라이브러리들) 와 같이 <script></script> 안에서 HTTP request 를 보낼 수 있는 기능이 생김에 따라, 
+> <script></script> 안에서도 다른 사이트의 데이터 요청을 지원해야 한다라는 요구가 생겨서 CORS 라는 가이드가 마련됨 (각 언어별 구현)
+
+
+### REST API method 정의하기
+- flask API 정의시, methods 에 지원하는 request method 를 작성하면 됨
+  - 각 요청 메서드마다 요청 메서드에 함께 오는 파라미터값을 추출하는 방식이 다름 
+    - GET/PUT/DELETE 는 동일, POST 만 다름
+- <<<<API 리턴값은 flask 의 jsonify() 함수를 사용해서, JSON 형식으로 리턴값을 넣어서 보내면 됨>>>
+
+```python
+#restapi_test.py에 구현되어 있음
+@app.route("/test", methods=['GET', 'POST', 'PUT', 'DELETE']) # 파라미터에 따로  method를 넣지 않으면 디폴트로 get방식이 됨
+def test():
+    #함수에서 request를 import함. 그 request 덕에 http요청(url등을 통해)등을 분석해서 request.method라고 할 수 있는 것임
+    if request.method == 'POST':
+        print ('POST')
+        data = request.get_json()  #post는 파라미터(ex.username, passwd등)와 그 값을 json형태로(딕셔너리) 전달함
+        print (data['email']) #그리고 내가 원하는 파라미터의 데이터을 key를 통해 value로 얻음
+    if request.method == 'GET':
+        print ('GET')
+        user = request.args.get('email') #get방식은 경우에는 post와 다르게 request.args.get()을 통해 직접적으로..?해당 파라미터의 값을 얻음
+        print (user)
+
+    #put과 delete는 get처럼 동작하므로 동일하게 해주면 됨
+
+    if request.method == 'PUT':
+        print ('PUT')
+        user = request.args.get('email')
+        print (user)
+    if request.method == 'DELETE':
+        print ('DELETE')
+        user = request.args.get('email')
+        print (user)
+
+    return jsonify(
+        {'status': 'success'}
+    )
+```
+
+######### 중요 ######
+### 주요 Request Method in HTML
+- HTML 에서는 GET 과 POST 만 지원함
+
+- GET: 정보 읽기(SELECT)
+  - 전달이 필요한 파라미터들은 URL을 통해! 전달- 사용자도 확인 가능
+  ex) https://search.shopping.naver.com/search/category?catId=50000167&frm=NVSHMDL&origQuery&pagingIndex=1&pagingSize=40&productSet=model&query&sort=rel&timestamp=&viewType=list
+      여기서 각 파라미터들: catId,frm,pagingIndex...등등
+      그리고 각 파라미터의 이름들을 딕셔너리(json)에서 key이름으로 쓰면 됨
+
+- POST: 정보 입력하기(INSERT)
+  - 전달이 필요한 파라미터들은 HTTP body에 포함되어 전달되므로, 사용자는 직접적인 확인 불가!!!!!!!!
+
+- PUT: 정보 수정하기(UPDATE), DELETE: 정보 삭제하기(DELETE)
+  - GET 과 마찬가지로 파라미터들이 URL을 통해 전달
+
+> 사실상 GET 또는 POST 방식을 많이 사용하며, POST 방식이 파라미터 정보를 노출하지 않으므로 POST 방식을 선호 <br>
+> 단, 요청 기능에 따라 GET, POST, PUT, DELETE HTTP 메서드를 쓰는 것을 권장하고는 있음 ('Restful 하다' 라고 이야기함)
