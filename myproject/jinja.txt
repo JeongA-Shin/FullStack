@@ -41,3 +41,18 @@ html
     {% else %}
     <h3>{{ data }}</h3>
     {% endif %}
+
+### 5.4. 주석 (Jinja2 template 문법)
+- {# #} 으로 주석 표시 가능
+-예:
+  <body>
+      {% if data >= 30 %}
+      <h3>30보다 큽니다.</h3>
+      {% elif data > 25 %}
+      <h3>25보다 큽니다.</h3>
+      {# 
+      {% else %}
+      <h3>{{ data }}</h3>
+      #} 
+      {% endif %}
+    </body>
