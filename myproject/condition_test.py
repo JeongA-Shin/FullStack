@@ -1,5 +1,3 @@
-#-*- coding: utf-8 -*-
-
 from flask import Flask,jsonify,request
 from flask.templating import render_template
 
