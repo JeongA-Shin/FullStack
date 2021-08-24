@@ -202,7 +202,11 @@ print(Figure.count) #0
  - self 파라미터를 갖고 있지 않음
  - **객체 속성에 접근 불가**
  - 정적 메서드는 메서드 앞에 @staticmethod 라는 Decorator를 넣어야 함
- - 클래스명.정적메서드명 또는 객체명.정적메서드명 둘 다 호출 가능'''
+ - 클래스명.정적메서드명 또는 객체명.정적메서드명 둘 다 호출 가능
+ 
+ !즉! 굳이 객체를 만들지 않고 바로 함수만 쓰고 싶으면 staticmethod로 선언해주면 됨!
+
+ '''
 
 class Figure:
     # 생성자(initializer)
@@ -271,7 +275,10 @@ print(Figure1.print_count()) # 2
 print(figure1.print_count()) # 2
 
 
-### static method 와 class method 차이!!!!!!!!!!!!!
+### static method 와 class method 차이!!!!!!!!!!!!
+# 클래스 함수는!
+#클래스의 모든 인스턴스에 적용되는 클래스 상태를 수정할 수 있습니다. !!!
+# 예를 들어 해당 클래스의 모든 인스턴스에 적용할 클래스 변수를 수정할 수 있습니다.
 
 #1.클래스 메서드
 class Figure:
@@ -305,3 +312,4 @@ Circle.set_name("circle")
 print (Figure.name, Circle.name) #circle circle 
 #static은 진짜 클래스와는 아무런 관계가 없는데 걍 결이 비슷해서 클래스 안에 있는 거임
 #그래서 그냥 함수를 실행하고/바꾸면 그 함수에 해당되는 모든 게 걍 다시 시작된다고 보면 됨
+
