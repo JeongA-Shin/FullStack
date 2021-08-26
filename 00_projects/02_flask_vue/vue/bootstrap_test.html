@@ -7,7 +7,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -16,10 +15,10 @@
       crossorigin="anonymous"
     />
 
-    <title>Hello, world!</title>
+  <title>Hello, world!</title>
   </head>
   <body>
-    <br /><br />
+    <br /><br/>
     <div id="test_vue">
       <center>
         <button type="button" class="btn btn-primary" v-on:click="axios_test">
@@ -30,32 +29,16 @@
         <button type="button" class="btn btn-danger">DELETE</button>
       </center>
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
-
+    <!--두 줄만 추가하면 vue를 할 수 있는 거임-->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 특정 섹션만 자바 스크립트를 통해 백엔드 없이 프론트 엔드로 동작시킬 수 있도록(변동) 함-->
     <script>
       const app = new Vue({
-        el: "#test_vue",
+        el: "#test_vue", //자바스크립트를 적용할 섹션의 id
         methods: {
           axios_test() {
-            axios("http://localhost:8082/test", {
+            axios("http://localhost:8082/test", { //axios로 호출할 특정 웹 페이지
               method: "get",
             })
               .then((response) => {
